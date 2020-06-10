@@ -1,0 +1,10 @@
+bin
+*.out
+*.o
+*.a
+tmp
+*.tar
+*.tar.gz
+*.ccls
+*.ccls-cache
+
