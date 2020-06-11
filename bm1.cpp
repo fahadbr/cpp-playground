@@ -8,12 +8,13 @@ using namespace std;
 bool func1(const string&);
 bool func2(const string&);
 bool func3(const string&);
+bool func4(const string&);
 
 int main(int argc, char *argv[]) {
   try {
     auto f = func1;
     if (argc != 2) {
-      cerr << "need exactly 1 argument which is an integer. provided " << argc << endl;
+      cerr << "need exactly 1 argument which is an integer. provided " << argc - 1 << endl;
     }
 
     int test_case {atoi(argv[1])};
@@ -27,11 +28,14 @@ int main(int argc, char *argv[]) {
       case 3:
         f = func3;
         break;
+      case 4:
+        f = func4;
+        break;
       default:
         cerr << "unsupported test case: " << test_case << endl;
     }
 
-    string date_str = "2020-06-12";
+    string date_str = "2020-06-30";
     for (int i = 0; i < 1000000; i++) {
       if (!f(date_str)) {
         cerr << "matching func failed to match" << endl;
@@ -64,11 +68,16 @@ bool func1(const string& date_str){
 }
 
 bool func2(const string& date_str){
-  static const regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}"};
-  return regex_match(date_str, re, regex_constants::match_any);
+  static const regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", regex::optimize};
+  return regex_match(date_str, re);
 }
 
 bool func3(const string& date_str){
-  static const boost::regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}"};
+  static const boost::regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", boost::regex::optimize};
   return boost::regex_match(date_str, re);
+}
+
+bool func4(const string& date_str) {
+  static const boost::regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", boost::regex::optimize};
+  return boost::regex_match(date_str.c_str(), re);
 }

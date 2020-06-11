@@ -5,14 +5,18 @@
 # Remove some rules from gmake that .SUFFIXES does not remove.
 SUFFIXES =
 
-CXX_FLAGS = "-std=c++17"
+CXX_FLAGS = -std=c++17 
 
 
 default: main
 
+bm1: bm1.cpp
+	@mkdir -p bin
+	clang++ $(CXX_FLAGS) -O2 ./$? -o bin/$@ -lboost_regex
+
 bin/%: %.cpp
 	@mkdir -p bin
-	clang++ $(CXX_FLAGS) ./$? -o $@ -lboost_regex
+	clang++ $(CXX_FLAGS) ./$? -o $@
 
 clean:
 	rm -Rf bin
