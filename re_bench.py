@@ -9,3 +9,4 @@ for i in range(1000000):
     if not re.search("[0-9]{4}-[0-9]{2}-[0-9]{2}", val):
         print("doesnt work")
         sys.exit(1)
+

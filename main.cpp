@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void do_stuff();
+auto do_stuff() -> void;
 
 int main(void) {
   try {
@@ -17,7 +17,7 @@ int main(void) {
   return 0;
 }
 
-void do_stuff() {
+auto do_stuff() -> void {
   using ssize_t = string::size_type;
 
   const string s{"this is the full string"};
@@ -28,9 +28,9 @@ void do_stuff() {
 
   while (start_pos != string::npos || delim_pos != string::npos) {
     const ssize_t end_pos{delim_pos == string::npos ? s.length() : delim_pos};
-    //string_view sv{&s.at(start_pos), end_pos - start_pos};
-    const char* sv = &s.at(start_pos);
-     //string sv{&s.at(start_pos), end_pos - start_pos};
+    // string_view sv{&s.at(start_pos), end_pos - start_pos};
+    const char *sv = &s.at(start_pos);
+    // string sv{&s.at(start_pos), end_pos - start_pos};
     // string sv = s.substr(start_pos, end_pos - start_pos);
 
     // cout << "string_view: " << sv << '\n';
