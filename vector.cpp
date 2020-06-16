@@ -24,13 +24,13 @@ auto do_stuff() -> void {
   vector<int> v{4, 5, 6, 7, 8};
 
   // modifying a vector by value doesnt work
-  // if we pass by value, the entire vector is copied
-  // despite the undelying data being allocated on the heap
+  // if we pass by value, the entire vector is copied into the function
+  // parameter despite the undelying data being allocated on the heap
   cout << "modifying vector by val\n";
   modify_vector_val(v, 2, 100);
 
-  cout << "modifying vector by ref\n";
-  modify_vector_ref(v, 3, 100);
+  cout << "modifying vector by ref\n";  // this will
+  modify_vector_ref(v, 3, 100);         // modify the original vector
 
   cout << "final vector value\n";
   print_vector(v);
