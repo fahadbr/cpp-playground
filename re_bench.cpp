@@ -9,6 +9,7 @@ bool func1(const string&);
 bool func2(const string&);
 bool func3(const string&);
 bool func4(const string&);
+bool func5(const string&);
 
 int main(int argc, char *argv[]) {
   try {
@@ -31,6 +32,9 @@ int main(int argc, char *argv[]) {
       case 4:
         f = func4;
         break;
+      case 5:
+        f = func5;
+        break;
       default:
         cerr << "unsupported test case: " << test_case << endl;
     }
@@ -52,7 +56,7 @@ int main(int argc, char *argv[]) {
 }
 
 bool func1(const string& date_str){
-  if (date_str[0] >= '0' && date_str[0] <= '9' &&
+  if (date_str.length() == 10 && date_str[0] >= '0' && date_str[0] <= '9' &&
     date_str[1] >= '0' && date_str[1] <= '9' &&
     date_str[2] >= '0' && date_str[2] <= '9' &&
     date_str[3] >= '0' && date_str[3] <= '9' &&
@@ -68,16 +72,48 @@ bool func1(const string& date_str){
 }
 
 bool func2(const string& date_str){
+  if (date_str.length() != 10) {
+    return false;
+  }
+
+  for (int i = 0; i < date_str.length(); i++) {
+    switch (i){
+      case 5:
+        if (date_str[i] < '0' || date_str[i] > '1') {
+          return false;
+        }
+        break;
+      case 8:
+        if (date_str[i] < '0' || date_str[i] > '3') {
+          return false;
+        }
+        break;
+      case 4:
+      case 7:
+        if (date_str[i] != '-') {
+          return false;
+        }
+        break;
+      defualt:
+        if (date_str[i] < '0' || date_str[i] > '9') {
+          return false;
+        }
+    }
+  }
+  return true;
+}
+
+bool func3(const string& date_str){
   static const regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", regex::optimize};
   return regex_match(date_str, re);
 }
 
-bool func3(const string& date_str){
+bool func4(const string& date_str){
   static const boost::regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", boost::regex::optimize};
   return boost::regex_match(date_str, re);
 }
 
-bool func4(const string& date_str) {
+bool func5(const string& date_str) {
   static const boost::regex re{"[0-9]{4}-[0-9]{2}-[0-9]{2}", boost::regex::optimize};
   return boost::regex_match(date_str.c_str(), re);
 }
