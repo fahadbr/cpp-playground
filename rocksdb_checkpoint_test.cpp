@@ -49,7 +49,6 @@ auto DBGet(const DBPtr& db, const string& key) -> string {
       throw runtime_error("got some other read error");
     }
   }
-
   return ret_val;
 }
 
