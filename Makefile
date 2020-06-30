@@ -10,7 +10,7 @@ cxx_flags = $(CXX_FLAGS) -std=c++17
 
 default: main
 
-bm1: bm1.cpp
+re_bench: re_bench.cpp
 	@mkdir -p bin
 	clang++ $(cxx_flags) -O2 ./$? -o bin/$@ -lboost_regex
 .PHONY: bm1
