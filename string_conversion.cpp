@@ -17,24 +17,28 @@ int main(void) {
   return 0;
 }
 
+// This class is testing out how a Class
+// can be automatically converted into a string
+// on assignment
 class Stringer {
-	public:
-		string value;
+  public:
+    string value;
 
-		operator std::string () const {
-			return value;
-		}
+    operator std::string () const {
+      return value;
+    }
 
 };
 
 auto do_stuff() -> void {
-	string s1{"hello "};
-	string s2;
+  string s1{"hello "};
+  string s2;
 
-	Stringer stringer{};
-	stringer.value = "I'm a Stringer :)";
+  Stringer stringer{};
+  stringer.value = "I'm a Stringer :)";
 
-	s2 = stringer;
+  s2 = stringer;
 
-	cout << s1 << s2 << endl;
+
+  cout << s1 << s2 << endl;
 }
